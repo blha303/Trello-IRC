@@ -46,11 +46,11 @@ def col(text, color):
     log.msg("col() : " + str(color) + " isn't a valid color")
 
 def nicklookup(ircnick):
-    return config["nickmap"][ircnick] if ircnick in config["nickmap"] else ircnick
+    return config["nickmap"][ircnick.lower()] if ircnick.lower() in config["nickmap"] else ircnick
 
 def trellonicklookup(username):
     inverse = {v:k for k,v in config["nickmap"].iteritems()}
-    return inverse[username] if username in inverse else username
+    return inverse[username.lower()] if username.lower() in inverse else username
 
 # Commands
 def u_addadmin(info, msg):
