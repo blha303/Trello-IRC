@@ -5,6 +5,8 @@ Created for [Puzl Inc.](http://puzlinc.com), made open-source with permission.
 
 If you use this with your company boards, please drop me a few dollars via Paypal (b3@blha303.com.au) or email me for other options.
 
+Trello board for this project: https://trello.com/b/AAji4Yjn/trello-irc
+
 Trello credential generation
 ----------------------------
 
