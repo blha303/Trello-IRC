@@ -1,0 +1,24 @@
+# People allowed to use commands that write to Trello (edit, comment, etc)
+admins: [blha303]
+# Board to work with. Bot currently supports only one board per instance
+board: BOARD-ID
+# Channel to listen for. Bot can be in other channels, but it will only listen in the channel(s) specified here
+channels: ['#trellotest']
+# IRC server
+host: irc.freenode.net
+# Nickname
+nick: nick
+# Map of IRC nick to Trello username. Populated with !welcome, or by hand
+nickmap:
+    blha303: stevensmith27
+# Organization name. For !welcome and !goodbye
+orgname: OrganizationName
+# Bot password, for bouncers. Leave as "" if not relevant
+password: ""
+# IRC port
+port: 6667
+# Trello credentials. See readme for how to create these
+trello_key: API_KEY
+trello_key_secret: API_SECRET
+trello_token_read: OAUTH_TOKEN_READONLY
+trello_token_write: OAUTH_TOKEN_READWRITE
