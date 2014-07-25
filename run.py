@@ -88,7 +88,7 @@ def u_trellohelp(info, msg):
             doc = globals()[f].__doc__
             if doc[:2] == "**":
                 if not admin_check(info):
-                    pass
+                    continue
                 doc = doc[2:]
             say(info, doc)
 
