@@ -22,7 +22,10 @@ def get_tc(write=False): # tc = trello client
     return trello.TrelloClient(config["trello_key"], token=config["trello_token_" + ("write" if write else "read")])
 
 def say(info, msg):
-    info["msg"](info["channel"], msg)
+    if len(msg) > 300:
+        info["msg"](info["channel"], sprunge(msg))
+    else:
+        info["msg"](info["channel"], msg)
     log.msg("{}: {}".format(info["channel"], msg))
 
 def load_config():
@@ -44,6 +47,9 @@ def col(text, color):
     if color in colors:
         return colors[color] + text + colors["reset"]
     log.msg("col() : " + str(color) + " isn't a valid color")
+
+def sprunge(text):
+    return requests.post("http://sprunge.us", data={'sprunge': text}).text.strip()
 
 def nicklookup(ircnick):
     return config["nickmap"][ircnick.lower()] if ircnick.lower() in config["nickmap"] else ircnick
@@ -83,6 +89,7 @@ def u_deladmin(info, msg):
 def u_trellohelp(info, msg):
     """!trellohelp - List commands"""
     info["channel"] = info["nick"]
+    outp = []
     for f in globals():
         if f[:2] == "u_":
             doc = globals()[f].__doc__
@@ -90,13 +97,16 @@ def u_trellohelp(info, msg):
                 if not admin_check(info):
                     continue
                 doc = doc[2:]
-            say(info, doc)
+            outp.append(doc)
+    say(info,sprunge("\n".join(outp)))
 
 def u_cards(info, msg):
     """!cards - List cards"""
     board = get_tc().get_board(config["board"])
     out = []
     for list in board.all_lists():
+        if list.name == "Done":
+            continue
         lcards = []
         x = 1
         for a in list.list_cards():
